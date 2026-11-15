@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kovo | Live Dialer Demo</title><link rel="stylesheet" href="./style.css">
+<script type="module" src="./demo.mjs"></script></head>
+<body><main>
+<header><span>KOVO COMMUNICATIONS INTELLIGENCE</span><b>SIMULATION</b></header>
+<h1>Clarity on the call.</h1>
+<p class="intro">See how Kovo can surface the next question while you’re still talking. This demo uses fictional speech. It never dials or uses your microphone.</p>
+<section aria-labelledby="call"><h2 id="call">Outbound demo</h2><p class="person">Sample caller <span>Product pilot</span></p>
+<fieldset><legend>Permission to transcribe this simulated call</legend><label><input type="checkbox" id="host"> You agree</label><label><input type="checkbox" id="caller"> Simulate caller agreeing</label></fieldset>
+<p id="status" role="status">Waiting for both people to agree.</p>
+<div class="actions"><button id="start" disabled>Start demo</button><button id="next" disabled>Next line</button><button id="reset" class="quiet">Reset</button></div>
+</section>
+<section class="coach" aria-labelledby="coach"><p class="eyebrow">ONLY YOU SEE THIS</p><h2 id="coach">Live suggestion</h2><p id="prompt" aria-live="polite">Suggestions will appear here.</p></section>
+<section aria-labelledby="words"><h2 id="words">Conversation</h2><ol id="lines" aria-label="Fictional transcript"></ol></section>
+</main></body></html>
