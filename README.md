@@ -33,3 +33,7 @@ No Mac or desktop companion is required to use the app on iPhone. A hosted serve
 
 ### Synthetic tests
 `npm test` checks consent gating/revocation, rule prompts, duplicate replacement/overlap, authenticated room access, two-person limit, and rejection of transcript storage on signaling API. `node --check public/app.js` checks syntax. Real-world networking and microphone behavior are not established by these tests.
+
+### Mount at a path
+Set `APP_MOUNT=/communication-intelligence` for the Node server when deploying at a path. The web app, install scope, invite links, and API move together. Keep that whole path routed to one backend over HTTPS.
+For a Cloudflare Worker with a D1 binding named `DB`, route the unchanged `/communication-intelligence/api/*` requests to `handleCommsSignaling(request, env)` and apply `worker-signaling-schema.sql` before use. Serve `public/` at the same path. This adapter stores only temporary signaling metadata, consent states, and hashed invite/session credentials. It does not store notes or audio. Expired rooms cannot be accessed and are cleared on subsequent API activity.

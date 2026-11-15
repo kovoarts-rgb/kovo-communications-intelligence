@@ -3,13 +3,19 @@ import {randomBytes} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 const id=()=>randomBytes(24).toString('hex');
-export function createServer(){
+export function createServer({mount=''}={}){
+ if(mount&&!/^\/[a-z0-9-]+$/.test(mount))throw new Error("Invalid mount path");
  const rooms=new Map();
  const timer=setInterval(()=>{for(const [k,r] of rooms)if(Date.now()-r.time>3600000)rooms.delete(k)},60000);timer.unref();
  const server=http.createServer(async(req,res)=>{
  const send=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data))};
  try{
  const url=new URL(req.url,'http://localhost');
+ if(mount){
+  if(url.pathname===mount&&req.method==='GET'){res.writeHead(308,{Location:mount+'/'+url.search});return res.end()}
+  if(!url.pathname.startsWith(mount+'/')){res.writeHead(404);return res.end('Not found')}
+  url.pathname=url.pathname.slice(mount.length);
+ }
  if(url.pathname.startsWith('/api/')){
  if(req.headers.origin && req.headers.origin!==`${req.headers['x-forwarded-proto']||'http'}://${req.headers.host}`)return send(403,{error:'Origin rejected'});
  let body={};if(req.method==='POST'){let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>65536)return send(413,{error:'Request too large'})}body=JSON.parse(raw||'{}')}
@@ -43,4 +49,4 @@ export function createServer(){
  }catch{if(!res.headersSent)send(400,{error:'Invalid request'});else res.end()}
  });server.on('close',()=>clearInterval(timer));return server;
 }
-if(process.argv[1]===fileURLToPath(import.meta.url))createServer().listen(process.env.PORT||8787,()=>console.log('Kovo Communications Intelligence: http://localhost:'+(process.env.PORT||8787)));
+if(process.argv[1]===fileURLToPath(import.meta.url))createServer({mount:process.env.APP_MOUNT||''}).listen(process.env.PORT||8787,()=>console.log('Kovo Communications Intelligence: http://localhost:'+(process.env.PORT||8787)));
