@@ -1,6 +1,6 @@
 # Kovo Communications Intelligence: design brief
 
-Build from public product behavior and supported standards. Do not copy Cluely code or reproduce hidden capture. No real call has been connected or tested.
+Build from public product behavior and supported standards. Do not copy Cluely code or reproduce hidden capture. iPhone is the only client target; no Mac companion. Validate Safari and Home Screen use on two physical iPhones over separate networks before calling live audio ready. No real call has been connected or tested.
 
 ## Minimum useful session
 1. Host opens a one-to-one browser room and sends a join link to the other participant. Calling without the assistant remains possible.

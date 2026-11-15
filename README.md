@@ -1,6 +1,6 @@
 # Kovo Communications Intelligence
 
-A consent-first, self-hosted prototype for one-to-one browser calls, optional speaker-labeled notes, and private rule-based coaching prompts. This is not a hosted live AI service and cannot read audio from other call apps. See the [call coverage matrix](docs/call-coverage.md) and [design brief](docs/design-brief.md).
+An iPhone-only product prototype for consent-first, one-to-one calls opened in Safari, optional speaker-labeled notes, and private rule-based coaching prompts. This is not a hosted live AI service and cannot read audio from other call apps. See the [call coverage matrix](docs/call-coverage.md) and [design brief](docs/design-brief.md).
 
 ## Runnable prototype (November 2026)
 
@@ -12,7 +12,7 @@ npm start
 # http://localhost:8787
 ```
 
-For another device, host behind HTTPS with a reverse proxy to port 8787. Set `PORT` if needed. The proxy must preserve Host and correctly set X-Forwarded-Proto. Do not expose plain HTTP for real calls. This is a prototype, not a hardened public multi-tenant deployment. Install the PWA from the browser's Add to Home Screen menu. Open the hosted HTTPS address in Safari, tap **Share > Add to Home Screen**, and enable **Open as Web App** if shown. This GitHub repository is source code, not the hosted calling app.
+No Mac or desktop companion is required to use the app on iPhone. A hosted server is still required. For iPhone access, host behind HTTPS with a reverse proxy to port 8787. Set `PORT` if needed. The proxy must preserve Host and correctly set X-Forwarded-Proto. Do not expose plain HTTP for real calls. This is a prototype, not a hardened public multi-tenant deployment. Install the PWA from the browser's Add to Home Screen menu. Open the hosted HTTPS address in Safari, tap **Share > Add to Home Screen**, and enable **Open as Web App** if shown. This GitHub repository is source code, not the hosted calling app.
 
 ### What is implemented
 - Two-member capability-link room; random independent member tokens. Invite is in URL fragment, removed on joining. In-memory HTTP-polling signaling expires after one idle hour. Server restart removes rooms.
